@@ -80,6 +80,9 @@ public class RegistroController extends HttpServlet {
 		String cedula=request.getParameter("cedula");
 		String email=request.getParameter("email_director");
 		String contraseña=request.getParameter("password");
+		System.out.println(nombre);
+		System.out.println(nombreDirector);
+		System.out.println(apellidoDirector);
 		
 		Grupoie grupo = new Grupoie();
 		DepartamentoDao depDao = new DepartamentoDao();
@@ -101,10 +104,11 @@ public class RegistroController extends HttpServlet {
 		
 		GrupodirectorDao grDirectorDao = new GrupodirectorDao();
 		Grupodirector grDirector= new Grupodirector();
-		dir.addGrupodirector(grDirector);
 		grDirector.setFechaRegistro(new Date());
 		grDirector.setDirector(dir);
 		grDirector.setGrupoie(grupo);
+		dir.addGrupodirector(grDirector);
+		
 		
 		
 		/*SolicitudDao sDao = new SolicitudDao();
