@@ -161,7 +161,7 @@ public class LoginController extends HttpServlet {
 			request.getSession().setAttribute("otrasActividades",gie.getOtraactividads());
 			
 			request.getSession().setAttribute("grupoIE", gie);
-			request.getRequestDispatcher("/index_director.jsp").forward(request, response);
+			request.getRequestDispatcher("/indx_director.jsp").forward(request, response);
 			
 		}else if(integrantValidate!=-1){
 			session.setAttribute("integrante", email); 

@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <!--Metaetiqueta para el uso del conjunto de caracteres adecuado-->
+    <!--Metaetiqueta p	ara el uso del conjunto de caracteres adecuado-->
     <meta charset="utf-8">
     <!--Metaetiqueta para corregir compatibilidad con navegador Microsft-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,7 +35,7 @@
                        <div class="ufps-btn-menu-bar"> </div>
                        <div class="ufps-btn-menu-bar"> </div>
                    </div>
-                   <a href="login.jsp" >
+                   <a href="index_director.jsp" >
                     <img href="login.jsp" src="img/horizontal_logo.png" width="240"/> </a>
                 </div>
 
@@ -82,7 +82,7 @@
                         <button class="ufps-btn-accordion">Planes e Informes</button>
                         <div class="ufps-accordion-panel">
                            <button onclick="window.location.href='plan_de_accion_act.jsp'" class="ufps-btn2" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plan de Accion Actual</button>
-<button onclick="window.location.href='informe_de_gestion_act.jsp'" class="ufps-btn2" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Informe de Gestion Actual</button>                            <button data-seleccion="historial_informes_dir_integr" class="ufps-btn2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Historial</button>
+<button onclick="window.location.href='informe_de_gestion_act.jsp'"	 class="ufps-btn2" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Informe de Gestion Actual</button>                            <button data-seleccion="historial_informes_dir_integr" class="ufps-btn2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Historial</button>
                         </div>
                         
                         <button class="ufps-btn2" data-seleccion="ajustes_dir">Ajustes</button>

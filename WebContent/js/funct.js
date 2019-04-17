@@ -1,3 +1,11 @@
+$("li a").click(function(event){
+	event.preventDefault();
+
+	if($(this).data("seleccion")!=null){
+		$("#cont").load($(this).data("seleccion")+".jsp");
+     
+	}
+});
 
 
 $("div button").click(function(event){
