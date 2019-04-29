@@ -7,7 +7,6 @@ $("li a").click(function(event){
 	}
 });
 
-
 $("div button").click(function(event){
 	event.preventDefault();
 

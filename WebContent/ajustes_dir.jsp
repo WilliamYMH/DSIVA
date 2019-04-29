@@ -22,6 +22,8 @@
     <div class="panel-heading">
         <i class="fa fa-address-card-o" aria-hidden="true"></i> Modifica tus datos
     </div>
+    </br>
+
     <div class="panel-body">
         <div class="form-responsive">
               <form method="post" action="EditarDatosController">
@@ -49,11 +51,15 @@
     </div>
 
 </div>
+</br>
+</br>
 <hr>
 <div class="panel panel-default">
     <div class="panel-heading">
         <i class="fa fa-pencil-square-o aria-hidden="true"></i> Agrega nuevos integrantes
     </div>
+     </br>
+    
     <div class="panel-body">
         <div class="form-responsive">
               <form method="post" action="RegistroIntegrantesController">
@@ -108,7 +114,8 @@
 <!-- Campo de entrada de hora -->
 
 
-
+</br>
+</br>
 
 <hr>
 
@@ -116,6 +123,8 @@
     <div class="panel-heading">
         <i class="fa fa-list-alt" aria-hidden="true"></i> Registro de integrantes (Se muestran todos los integrantes del grupo)
     </div>
+     </br>
+    
     <div class="panel-body">
   
         <div class="table-responsive">

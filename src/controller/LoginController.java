@@ -65,8 +65,8 @@ public class LoginController extends HttpServlet {
 		IntegranteDao intDao = new IntegranteDao();
 		 
 		int adminValidate = adminDao.seEncuentra(administrador); //Calling authenticateUser function
-		int directValidate = direcDao.seEncuentra(director); //Calling authenticateUser function
-		int integrantValidate = intDao.seEncuentra(integrante); //Calling authenticateUser function
+		
+		
 	
 		if(adminValidate!=-1) {
 			
@@ -75,7 +75,9 @@ public class LoginController extends HttpServlet {
 			request.getSession().setAttribute("user", adm); 			
 			request.getRequestDispatcher("/index_adm.jsp").forward(request, response);
 			
-		} else if(directValidate!=-1){
+		} else{
+			int directValidate = direcDao.seEncuentra(director); //Calling authenticateUser function
+			if(directValidate!=-1){
 			session.setAttribute("director", email); 
 			Director dir2=direcDao.find(directValidate);
 			request.getSession().setAttribute("user", dir2);
@@ -163,97 +165,104 @@ public class LoginController extends HttpServlet {
 			request.getSession().setAttribute("grupoIE", gie);
 			request.getRequestDispatcher("/indx_director.jsp").forward(request, response);
 			
-		}else if(integrantValidate!=-1){
-			session.setAttribute("integrante", email); 
-			Integrante inte2=intDao.find(integrantValidate);
-			Grupoie gie=null;
-			request.getSession().setAttribute("user", inte2); 
-			ArrayList<Grupointegrante> arr=(ArrayList<Grupointegrante>) new GrupointegranteDao().list();
-			for (int i = 0; i < arr.size(); i++) {
-				if (inte2.getIdIntegrante()==arr.get(i).getIntegrante().getIdIntegrante()) {
-					gie=arr.get(i).getGrupoie();					
-					break;
+		}else{
+			int integrantValidate = intDao.seEncuentra(integrante); //Calling authenticateUser function
+			 if(integrantValidate!=-1){
+				session.setAttribute("integrante", email); 
+				Integrante inte2=intDao.find(integrantValidate);
+				Grupoie gie=null;
+				request.getSession().setAttribute("user", inte2); 
+				ArrayList<Grupointegrante> arr=(ArrayList<Grupointegrante>) new GrupointegranteDao().list();
+				for (int i = 0; i < arr.size(); i++) {
+					if (inte2.getIdIntegrante()==arr.get(i).getIntegrante().getIdIntegrante()) {
+						gie=arr.get(i).getGrupoie();					
+						break;
+					}
+					
 				}
 				
-			}
-			
-System.out.println(gie.getNombre()+"etse");
-			
-			request.getSession().setAttribute("lineasDeInvestigacion", gie.getLineainvesrigacions());
-			
-			ArrayList<Direccionpro> P = new ArrayList<>();
-			ArrayList<Direccionpro> E = new ArrayList<>();
-			ArrayList<Direccionpro> M = new ArrayList<>();
-			ArrayList<Direccionpro> D = new ArrayList<>();
-
-			if(gie.getDireccionpros()!=null)
-			{
-			
-				for (int i = 0; i < gie.getDireccionpros().size(); i++) {
-				if (gie.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Pregrado")) {
-					P.add(gie.getDireccionpros().get(i));
-				}
-			}
+	System.out.println(gie.getNombre()+"etse");
 				
-
+				request.getSession().setAttribute("lineasDeInvestigacion", gie.getLineainvesrigacions());
 				
-			
-			
-			for (int i = 0; i < gie.getDireccionpros().size(); i++) {
-				if (gie.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Especializacion")) {
-					E.add(gie.getDireccionpros().get(i));
-				}
-			}
-			
-			for (int i = 0; i < gie.getDireccionpros().size(); i++) {
-				if (gie.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Maestria")) {
-					M.add(gie.getDireccionpros().get(i));
-				}
-			}
-			
-			for (int i = 0; i < gie.getDireccionpros().size(); i++) {
-				if (gie.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Doctorado")) {
-					D.add(gie.getDireccionpros().get(i));
-				}
-			}
-			
-			
-			}
-			request.getSession().setAttribute("direccionPregrado",P );	
-			request.getSession().setAttribute("direccionEspecializacion",E );	
-			request.getSession().setAttribute("direccionMaestria",M );
-			request.getSession().setAttribute("direccionDoctorado",D );
+				ArrayList<Direccionpro> P = new ArrayList<>();
+				ArrayList<Direccionpro> E = new ArrayList<>();
+				ArrayList<Direccionpro> M = new ArrayList<>();
+				ArrayList<Direccionpro> D = new ArrayList<>();
 
-			
-			
-			
-			
-			
-			
-			ArrayList<Proyecto> Dr = new ArrayList<>();
-			ArrayList<Proyecto>  Pr = (ArrayList<Proyecto>) new ProyectoDao().list();
-			if(Pr!=null){
-				for (int i = 0; i < Pr.size(); i++) {
-					if (Pr.get(i).getLineainvesrigacion().getGrupoie().getIdGrupoIE()==gie.getIdGrupoIE()) {
-						Dr.add(Pr.get(i));
+				if(gie.getDireccionpros()!=null)
+				{
+				
+					for (int i = 0; i < gie.getDireccionpros().size(); i++) {
+					if (gie.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Pregrado")) {
+						P.add(gie.getDireccionpros().get(i));
 					}
 				}
+					
+
+					
+				
+				
+				for (int i = 0; i < gie.getDireccionpros().size(); i++) {
+					if (gie.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Especializacion")) {
+						E.add(gie.getDireccionpros().get(i));
+					}
+				}
+				
+				for (int i = 0; i < gie.getDireccionpros().size(); i++) {
+					if (gie.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Maestria")) {
+						M.add(gie.getDireccionpros().get(i));
+					}
+				}
+				
+				for (int i = 0; i < gie.getDireccionpros().size(); i++) {
+					if (gie.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Doctorado")) {
+						D.add(gie.getDireccionpros().get(i));
+					}
+				}
+				
+				
+				}
+				request.getSession().setAttribute("direccionPregrado",P );	
+				request.getSession().setAttribute("direccionEspecializacion",E );	
+				request.getSession().setAttribute("direccionMaestria",M );
+				request.getSession().setAttribute("direccionDoctorado",D );
+
+				
+				
+				
+				
+				
+				
+				ArrayList<Proyecto> Dr = new ArrayList<>();
+				ArrayList<Proyecto>  Pr = (ArrayList<Proyecto>) new ProyectoDao().list();
+				if(Pr!=null){
+					for (int i = 0; i < Pr.size(); i++) {
+						if (Pr.get(i).getLineainvesrigacion().getGrupoie().getIdGrupoIE()==gie.getIdGrupoIE()) {
+							Dr.add(Pr.get(i));
+						}
+					}
+				}
+				
+				request.getSession().setAttribute("proyectos",Dr );
+				
+				
+				request.getSession().setAttribute("eventos",new GrupoieDao().find(gie.getIdGrupoIE()).getEventos() );
+				
+				request.getSession().setAttribute("otrasActividades",gie.getOtraactividads());
+				
+				request.getSession().setAttribute("grupoIE", gie);
+				request.getRequestDispatcher("/index_integr.jsp").forward(request, response);
+				
 			}
+			 else{ 
+				request.getSession().setAttribute("errorCredenciales", 1); 
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
+			 }
 			
-			request.getSession().setAttribute("proyectos",Dr );
-			
-			
-			request.getSession().setAttribute("eventos",new GrupoieDao().find(gie.getIdGrupoIE()).getEventos() );
-			
-			request.getSession().setAttribute("otrasActividades",gie.getOtraactividads());
-			
-			request.getSession().setAttribute("grupoIE", gie);
-			request.getRequestDispatcher("/index_integr.jsp").forward(request, response);
-			
-		}else{ 
-			request.getSession().setAttribute("msgResultado", "Hay un error en las credenciales"); 
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
+		
+	}
 	}
 
 }

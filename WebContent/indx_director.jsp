@@ -19,9 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
     <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-
+    <script src="https://use.fontawesome.com/4a0c8877dc.js"></script>
 </head>
 
 <body>
@@ -37,7 +35,7 @@
             <ul class="list-unstyled components">
                 <li>
                     <a href="#planSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-home"></i>
+                        <i class="fa fa-pencil-square-o"></i>
                         Plan de acción
                     </a>
                     <ul class="collapse list-unstyled" id="planSubmenu">
@@ -52,7 +50,7 @@
                 </li>
                 <li>
                     <a href="#informeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-briefcase"></i>
+                        <i class="fa fa-file-text"></i>
                        Informe de gestión
                     </a>
                     <ul class="collapse list-unstyled" id="informeSubmenu">
@@ -65,32 +63,35 @@
                        
                     </ul>
                     <li class="active">
-                        <a href="#" onclick="cargarHistorial();">
-                            <i class="fas fa-image"></i>
+                        <a href="#" data-seleccion="historial_informes_dir_integr">
+                            <i class="fa fa-folder-open"></i>
                             Historial
                         </a>
                     </li>
                 </li>
                 <li>
-                    <a href="#ajustesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" data-seleccion="ajustes_dir">
-                        <i class="fas fa-briefcase"></i>
+                    <a href="#ajustesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fa fa-cogs"></i>
                        Ajustes
                     </a>
                     <ul class="collapse list-unstyled" id="ajustesSubmenu">
                         <li>
-                            <a href="#">Modificar datos</a>
+                            <a href="#"  data-seleccion="ajustes_dir">Modificar datos</a>
                         </li>
-                        <li>
-                            <a href="#">Agregar integrantes</a>
-                        </li>
+                      
                        
                     </ul>
                 </li>
-                <li>
-                    <a href="#" data-seleccion="login">
-                        <i class="fas fa-question"></i>
+                <li>            
+                <form method="post" action="LogoutController" id="logout">
+                
+                </form>
+                         
+                       <a href="#" onclick="document.getElementById('logout').submit();" >
+                        <i class="fa fa-power-off"></i>
                        Salir
                     </a>
+                    
                 </li>
                 
             </ul>
@@ -104,7 +105,7 @@
                 <div class="container-fluid">
 
                     <button type="button" id="sidebarCollapse" class="btn btn-danger">
-                        <i class="fas fa-align-left"></i>
+                        <i class="fa fa-align-left"></i>
                         <span>UFPS</span>
                     </button>
                     <div class="btn btn-dark d-inline-block d-lg-none ml-auto">
@@ -133,7 +134,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 	      </script>
         <script type="text/javascript" src="js/f_sidebar.js"></script>   
-	
+	  <script type="text/javascript" src="js/funct.js">
+    </script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#sidebar").mCustomScrollbar({
@@ -148,5 +150,10 @@
         });
    
 </script>
+<script>
+      $( window ).on( "load", function() {
+         $("#cont").load("historial_informes_dir_integr.jsp");    
+    });        
+  </script>
 </body>
 </html>

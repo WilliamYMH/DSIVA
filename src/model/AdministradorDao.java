@@ -14,6 +14,7 @@ public int seEncuentra(Administrador ad){
 	ArrayList<Administrador> arr=(ArrayList<Administrador>) this.list();
 	for (int i = 0; i < arr.size(); i++) {
 		if(arr.get(i).getEmail().equals(ad.getEmail())){
+			if(!arr.get(i).getPassword().equals(ad.getPassword())) return -1;
 			return arr.get(i).getIdAdministrador();
 
 		}

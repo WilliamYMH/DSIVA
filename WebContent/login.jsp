@@ -32,15 +32,24 @@
 									<img id="logo_login" src="img/horizontal_logo.png"
 										class="img-fluid" alt="Responsive image"></img>
 								</center>
-								<br />
-								<br />
-								<br />
-								<br />
+								<br /> <br /> <br /> <br />
 							</div>
 
 						</div>
 						<div class="row">
 							<div class="col-md-9 col-lg-8 mx-auto">
+								<c:if test="${errorCredenciales==1}">
+								
+									<div class="alert alert-warning alert-dismissible fade show"
+										role="alert">
+										 Correo o contraseña incorrecta
+										<button type="button" class="close" data-dismiss="alert"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									
+								</c:if>
 								<form method="post" action="LoginController">
 									<div class="form-label-group">
 										<input name="email" type="email" id="inputEmail"
@@ -130,14 +139,15 @@
 					</button>
 				</div>
 				<div class="modal-body">
-				<div class="container-fluid">
-					
-					
+					<div class="container-fluid">
+
+
 						<div class="form-group">
-						<form method="post" action="RegistroController">
-							<jsp:useBean id="departamentoDao" class="model.DepartamentoDao" scope="request"> 
-</jsp:useBean>
-							
+							<form method="post" action="RegistroController">
+								<jsp:useBean id="departamentoDao" class="model.DepartamentoDao"
+									scope="request">
+								</jsp:useBean>
+
 								<div class="row">
 									<div class="col-md-5 ">
 										<label class="col-form-label">Nombre del grupo *: </label>
@@ -147,7 +157,8 @@
 										<input type="text" class="form-control" placeholder=""
 											name="nombreGrupo" required autofocus>
 									</div>
-								</div></br>
+								</div>
+								</br>
 								<div class="row">
 									<div class="col-md-5 ">
 										<label class="col-form-label">Departamento *: </label>
@@ -163,8 +174,9 @@
 										</select>
 									</div>
 
-								</div></br>
-								
+								</div>
+								</br>
+
 								<div class="row">
 									<div class="col-md-5 ">
 										<label class="col-form-label">Nombre del director *: </label>
@@ -172,21 +184,24 @@
 									</div>
 									<div class="col-md-7 .ml-auto">
 										<input type="text" class="form-control" placeholder=""
-											name="nombre_director" required >
+											name="nombre_director" required>
 									</div>
-								</div></br>
-								
+								</div>
+								</br>
+
 								<div class="row">
 									<div class="col-md-5 ">
-										<label class="col-form-label">Apellido del director *: </label>
+										<label class="col-form-label">Apellido del director *:
+										</label>
 
 									</div>
 									<div class="col-md-7 .ml-auto">
 										<input type="text" class="form-control" placeholder=""
-											name="apellido_director" required >
+											name="apellido_director" required>
 									</div>
-								</div></br>
-								
+								</div>
+								</br>
+
 								<div class="row">
 									<div class="col-md-5 ">
 										<label class="col-form-label">Cedula del director *: </label>
@@ -194,10 +209,11 @@
 									</div>
 									<div class="col-md-7 .ml-auto">
 										<input type="text" class="form-control" placeholder=""
-											name="cedula" required >
+											name="cedula" required>
 									</div>
-								</div></br>
-								
+								</div>
+								</br>
+
 								<div class="row">
 									<div class="col-md-5 ">
 										<label class="col-form-label">Correo electronico *: </label>
@@ -205,33 +221,34 @@
 									</div>
 									<div class="col-md-7 .ml-auto">
 										<input name="email_director" type="email" class="form-control"
-								placeholder="Email address" required>
+											placeholder="Email address" required>
 									</div>
-								</div></br>
-								
+								</div>
+								</br>
+
 								<div class="row">
 									<div class="col-md-5 ">
 										<label class="col-form-label">Contraseña *: </label>
-	
+
 									</div>
 									<div class="col-md-7 .ml-auto">
 										<input name="password" type="password" class="form-control"
-								placeholder="" required>
+											placeholder="" required>
 									</div>
 								</div>
-								
-								
-						
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">Cerrar</button>
-							<button type="submit" class="btn btn-danger">Enviar</button>
 
+
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Cerrar</button>
+									<button type="submit" class="btn btn-danger">Enviar</button>
+
+								</div>
+							</form>
 						</div>
-						</form>
-						</div>
-				
-</div>
+
+					</div>
 				</div>
 
 
