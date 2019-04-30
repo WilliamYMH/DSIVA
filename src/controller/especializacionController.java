@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.DireccionproDao;
+import model.GrupoieDao;
 import negocio.Direccionpro;
 import negocio.Grupoie;
 
@@ -61,6 +62,8 @@ public class especializacionController extends HttpServlet {
 		direccion.setGrupoie(aux);
 		dDao.insert(direccion);
 		
+		aux=  new GrupoieDao().find(aux.getIdGrupoIE());
+		
 		ArrayList<Direccionpro> d = new ArrayList<>();
 		for (int i = 0; i < aux.getDireccionpros().size(); i++) {
 			if (aux.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Especializacion")) {
@@ -68,9 +71,9 @@ public class especializacionController extends HttpServlet {
 			}
 		}
 		
-		
+		request.getSession().setAttribute("grupoIE", aux);
 		request.getSession().setAttribute("direccionEspecializacion",d );
-		request.getRequestDispatcher("/plan_de_accion_act.jsp").forward(request, response);
-	}
+		response.sendRedirect(request.getContextPath() + "/plan_de_accion_act.jsp");
+		}
 
 }

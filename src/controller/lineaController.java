@@ -63,8 +63,12 @@ public class lineaController extends HttpServlet {
 		linea.setGrupoie(aux);
 		lDao.insert(linea);
 		
+		aux= new GrupoieDao().find(aux.getIdGrupoIE());
+	System.out.println(aux.getLineainvesrigacions().size()+" - TAMANIO LINEAS");
 		request.getSession().setAttribute("lineasDeInvestigacion", aux.getLineainvesrigacions());
-		request.getRequestDispatcher("/plan_de_accion_act.jsp").forward(request, response);
+		request.getSession().setAttribute("grupoIE", aux);
+		response.sendRedirect(request.getContextPath() + "/plan_de_accion_act.jsp");
+		//request.getRequestDispatcher("/plan_de_accion_act.jsp").forward(request, response);
 	}
 
 }

@@ -18,6 +18,7 @@ import negocio.Grupointegrante;
 import negocio.Integrante;
 import negocio.Director;
 import negocio.Grupodirector;
+import model.GrupoieDao;
 import model.GrupointegranteDao;
 import model.IntegranteDao;
 
@@ -75,7 +76,7 @@ public class RegistroIntegrantesController extends HttpServlet {
 		intdDao.insert(integr);
 		Director dr =(Director)request.getSession().getAttribute("user");
 		
-
+		Grupoie aux =  (Grupoie) request.getSession().getAttribute("grupoIE");
 		Grupointegrante grIntgr = new Grupointegrante();
 		GrupointegranteDao grIntegrDao = new GrupointegranteDao();
 	
@@ -86,13 +87,13 @@ public class RegistroIntegrantesController extends HttpServlet {
 		grIntgr.setIntegrante(integr);		
 		grIntgr.setFechaRegistro(new Date());
 		grIntegrDao.insert(grIntgr);
-		
-		
+		request.getSession().setAttribute("grupoIE", aux);
+		aux= new GrupoieDao().find(aux.getIdGrupoIE());
 		request.getSession().setAttribute("integrantes", intdDao.list()); 	
-		
+		request.getSession().setAttribute("lineasDeInvestigacion", aux.getLineainvesrigacions());
 		
 		PrintWriter out = response.getWriter();
-		request.getRequestDispatcher("/index_director.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/indx_director.jsp");
 		/*response.getWriter().append("<br/>Nombre: ").append(nombre);
 		response.getWriter().append("<br/>Presidente: ").append(presidente);*/
 

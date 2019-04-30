@@ -90,7 +90,8 @@ public class RegistroAdministradoresController extends HttpServlet {
 		
 		
 		PrintWriter out = response.getWriter();	
-		request.getRequestDispatcher("/index_adm.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/indx_administrador.jsp");
+
 		/*response.getWriter().append("<br/>Nombre: ").append(nombre);
 		response.getWriter().append("<br/>Presidente: ").append(presidente);*/
 

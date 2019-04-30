@@ -68,8 +68,10 @@ public class proyectoController extends HttpServlet {
 		proyecto.setProyecto(nombreProyecto);
 		proyecto.setLineainvesrigacion(aux.getLineainvesrigacions().get(0));
 		pDao.insert(proyecto);	
+		aux= new GrupoieDao().find(aux.getIdGrupoIE());
 		request.getSession().setAttribute("lineasDeInvestigacion", aux.getLineainvesrigacions());
-		request.getRequestDispatcher("/plan_de_accion_act.jsp").forward(request, response);
-	}
+		
+		request.getSession().setAttribute("grupoIE", aux);
+		response.sendRedirect(request.getContextPath() + "/plan_de_accion_act.jsp");	}
 
 }

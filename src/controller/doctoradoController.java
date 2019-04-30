@@ -66,16 +66,18 @@ public class doctoradoController extends HttpServlet {
 		direccion.setGrupoie(aux);
 		dDao.insert(direccion);
 		ArrayList<Direccionpro> d = new ArrayList<>();
-		System.out.println(new GrupoieDao().find(aux.getIdGrupoIE()).getDireccionpros().size());
-		List<Direccionpro> dr = (new GrupoieDao().find(aux.getIdGrupoIE()).getDireccionpros());
+		
+		aux=new GrupoieDao().find(aux.getIdGrupoIE());
+		List<Direccionpro> dr = (aux.getDireccionpros());
 		for (int i = 0; i < dr.size(); i++) {
 			if (dr.get(i).getTipoPro().equalsIgnoreCase("Doctorado")) {
 				d.add(dr.get(i));
 			}
 		}
-		
-		request.getSession().setAttribute("direccionDoctorado",d );
-		request.getRequestDispatcher("/plan_de_accion_act.jsp").forward(request, response);
-	}
+		request.getSession().setAttribute("direccionDoctorado",aux.getDireccionpros());
+		request.getSession().setAttribute("grupoIE", aux);
+
+		response.sendRedirect(request.getContextPath() + "/plan_de_accion_act.jsp");
+		}
 
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.GrupoieDao;
 import model.OtraactividadDao;
 import negocio.Grupoie;
 import negocio.Otraactividad;
@@ -59,8 +60,13 @@ public class actividadController extends HttpServlet {
 		otraActividad.setGrupoie(aux);
 		oDao.insert(otraActividad);
 		
-		request.getSession().setAttribute("otrasActividades",aux.getOtraactividads());
-		request.getRequestDispatcher("/plan_de_accion_act.jsp").forward(request, response);
+		aux= new GrupoieDao().find(aux.getIdGrupoIE());
+		//System.out.println(aux.getLineainvesrigacions().size()+" - TAMANIO LINEAS");
+		
+			request.getSession().setAttribute("otrasActividades", aux.getOtraactividads());
+			request.getSession().setAttribute("grupoIE", aux);
+			response.sendRedirect(request.getContextPath() + "/plan_de_accion_act.jsp");
+
 		
 	}
 

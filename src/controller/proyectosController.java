@@ -36,9 +36,10 @@ public class proyectosController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);		
-		System.out.println(request.getParameter("linea1"));
+		
 		request.getSession().setAttribute("linea", request.getParameter("linea1"));
-		request.getRequestDispatcher("/agregarProyecto.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/agregarProyecto.jsp");
+
 	}
 
 }

@@ -67,8 +67,10 @@ public class eventoController extends HttpServlet {
 		evento.setGrupoie(aux);
 		eDao.insert(evento);
 		
-		request.getSession().setAttribute("eventos",new GrupoieDao().find(aux.getIdGrupoIE()).getEventos() );
-		request.getRequestDispatcher("/plan_de_accion_act.jsp").forward(request, response);
+		aux=new GrupoieDao().find(aux.getIdGrupoIE());
+		request.getSession().setAttribute("eventos", aux.getEventos());
+		request.getSession().setAttribute("grupoIE", aux);
+		response.sendRedirect(request.getContextPath() + "/plan_de_accion_act.jsp");
 	}
 
 }

@@ -39,58 +39,24 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#planSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <a href="#" data-seleccion="info_semestre_act_adm">
                         <i class="fa fa-pencil-square-o"></i>
-                        Plan de acción
+                        Planes e informes
                     </a>
-                    <ul class="collapse list-unstyled" id="planSubmenu">
-                      <li>
-                      <form method="post" action="PlanController" id="plan">
-                
-                </form>
-                        
-                            <a href="#" onclick="document.getElementById('plan').submit();" >Editar</a>
-                        </li>
-                        <li>
-                            <a href="#">Descargar pdf</a>
-                        </li>
-                       
-                    </ul>
+                   
                 </li>
-                <li>
-                    <a href="#informeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fa fa-file-text"></i>
-                       Informe de gestión
-                    </a>
-                    <ul class="collapse list-unstyled" id="informeSubmenu">
-                        <li>
-                            <a href="informe_de_gestion_act.jsp">Editar</a>
-                        </li>
-                        <li>
-                            <a href="#">Descargar pdf</a>
-                        </li>
-                       
-                    </ul>
-                    <li class="active">
-                        <a href="#" data-seleccion="historial_informes_dir_integr">
+                <li class="active">
+                        <a href="#" data-seleccion="historial_informes_adm">
                             <i class="fa fa-folder-open"></i>
                             Historial
                         </a>
                     </li>
-                </li>
                 <li>
-                    <a href="#ajustesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <a href="#" data-seleccion="ajustes_adm2">
                         <i class="fa fa-cogs"></i>
                        Ajustes
-                    </a>
-                    <ul class="collapse list-unstyled" id="ajustesSubmenu">
-                        <li>
-                            <a href="#"  data-seleccion="ajustes_dir">Modificar datos</a>
-                        </li>
-                      
-                       
-                    </ul>
-                </li>
+                    </a></li>
+                  
                 <li>            
                 <form method="post" action="LogoutController" id="logout">
                 
@@ -162,7 +128,7 @@
 </script>
 <script>
       $( window ).on( "load", function() {
-         $("#cont").load("historial_informes_dir_integr.jsp");    
+         $("#cont").load("historial_informes_adm.jsp");    
     });        
   </script>
 </body>

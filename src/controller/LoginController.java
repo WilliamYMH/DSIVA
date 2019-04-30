@@ -42,7 +42,7 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(true);
-		System.out.println("________________________________ ACA");
+	
 		
 		String email = request.getParameter("email");
 		String contraseña = request.getParameter("password");
@@ -73,7 +73,7 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("admin", email); 
 			Administrador adm= adminDao.find(adminValidate);
 			request.getSession().setAttribute("user", adm); 			
-			request.getRequestDispatcher("/index_adm.jsp").forward(request, response);
+			request.getRequestDispatcher("/indx_administrador.jsp").forward(request, response);
 			
 		} else{
 			int directValidate = direcDao.seEncuentra(director); //Calling authenticateUser function

@@ -130,8 +130,8 @@ public class RegistroController extends HttpServlet {
 		//sDao.insert(sol);
 		HttpSession session = request.getSession();
 		session.setAttribute("director", dir);
-		RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-		rd.forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/login.jsp");
+
 
 		/*response.getWriter().append("<br/>Nombre: ").append(nombre);
 		response.getWriter().append("<br/>Presidente: ").append(presidente);*/

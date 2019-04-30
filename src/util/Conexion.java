@@ -59,7 +59,8 @@ public class Conexion<T> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			//em.close();
+			em = null;
+			
 		}
 		
 	}
