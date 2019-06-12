@@ -1,7 +1,8 @@
 package controller;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -78,8 +79,10 @@ public class LoginController extends HttpServlet {
 		} else{
 			int directValidate = direcDao.seEncuentra(director); //Calling authenticateUser function
 			if(directValidate!=-1){
+				
 			session.setAttribute("director", email); 
 			Director dir2=direcDao.find(directValidate);
+			
 			request.getSession().setAttribute("user", dir2);
 
 			Grupoie gie=null;
@@ -92,78 +95,54 @@ public class LoginController extends HttpServlet {
 				}
 				
 			}
-			System.out.println(gie.getNombre()+"etse");
+			
 			
 			request.getSession().setAttribute("lineasDeInvestigacion", gie.getLineainvesrigacions());
+			request.getSession().setAttribute("direccionProyectos", gie.getDireccionpros());
 			
-			ArrayList<Direccionpro> P = new ArrayList<>();
-			ArrayList<Direccionpro> E = new ArrayList<>();
-			ArrayList<Direccionpro> M = new ArrayList<>();
-			ArrayList<Direccionpro> D = new ArrayList<>();
-
-			
-
-			if(gie.getDireccionpros()!=null)
-			{
-			
-				for (int i = 0; i < gie.getDireccionpros().size(); i++) {
-				if (gie.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Pregrado")) {
-					P.add(gie.getDireccionpros().get(i));
+			List<Grupointegrante> listIntegrantes=(List<Grupointegrante>)new GrupointegranteDao().list();
+			ArrayList<Integrante> integrantes = new ArrayList<>();
+			for(Grupointegrante i: listIntegrantes){
+				if(i.getGrupoie().getNombre().equals(gie.getNombre())){
+					integrantes.add(i.getIntegrante());
 				}
 			}
-				
-
-				
-			
-			
-			for (int i = 0; i < gie.getDireccionpros().size(); i++) {
-				if (gie.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Especializacion")) {
-					E.add(gie.getDireccionpros().get(i));
-				}
-			}
-			
-			for (int i = 0; i < gie.getDireccionpros().size(); i++) {
-				if (gie.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Maestria")) {
-					M.add(gie.getDireccionpros().get(i));
-				}
-			}
-			
-			for (int i = 0; i < gie.getDireccionpros().size(); i++) {
-				if (gie.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Doctorado")) {
-					D.add(gie.getDireccionpros().get(i));
-				}
-			}
-			
-			
-			}
-			request.getSession().setAttribute("direccionPregrado",P );	
-			request.getSession().setAttribute("direccionEspecializacion",E );	
-			request.getSession().setAttribute("direccionMaestria",M );
-			request.getSession().setAttribute("direccionDoctorado",D );
+			request.getSession().setAttribute("integrantes", integrantes); 	
 
 
 			
 			ArrayList<Proyecto> Dr = new ArrayList<>();
 			ArrayList<Proyecto>  Pr = (ArrayList<Proyecto>) new ProyectoDao().list();
+			ArrayList<Producto> productos = new ArrayList<>();
 			if(Pr!=null)
 			{
 			for (int i = 0; i < Pr.size(); i++) {
 				if (Pr.get(i).getLineainvesrigacion().getGrupoie().getIdGrupoIE()==gie.getIdGrupoIE()) {
 					Dr.add(Pr.get(i));
+					productos.addAll(Pr.get(i).getProductos());
 				}
 			}
 
 			}
-			request.getSession().setAttribute("proyectos",Dr );
-
+			List<Otraactividad> otrasActivididades =  gie.getOtraactividads();
+			for(int i=0;i<otrasActivididades.size();i++){
+				productos.addAll(otrasActivididades.get(i).getProductos());
+			}
+			request.getSession().setAttribute("proyectos",Dr);
+			request.getSession().setAttribute("productos", productos);
 			
-			
-			request.getSession().setAttribute("eventos",new GrupoieDao().find(gie.getIdGrupoIE()).getEventos() );
+						
+			request.getSession().setAttribute("eventos",gie.getEventos());
 			
 			request.getSession().setAttribute("otrasActividades",gie.getOtraactividads());
 			
 			request.getSession().setAttribute("grupoIE", gie);
-			request.getRequestDispatcher("/indx_director.jsp").forward(request, response);
+			
+			 response.setHeader("Cache-Control","no-cache, no-store, must-revalidate");		 
+			 response.setDateHeader("Expires", 0);
+			request.getSession().setAttribute("pageJS", "historial_informes_dir_integr.jsp");
+			//request.getRequestDispatcher("/indx_director.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath()+"/indx_director.jsp");
 			
 		}else{
 			int integrantValidate = intDao.seEncuentra(integrante); //Calling authenticateUser function
@@ -181,83 +160,47 @@ public class LoginController extends HttpServlet {
 					
 				}
 				
-	System.out.println(gie.getNombre()+"etse");
-				
+	//System.out.println(gie.getNombre()+"etse");			
 				request.getSession().setAttribute("lineasDeInvestigacion", gie.getLineainvesrigacions());
-				
-				ArrayList<Direccionpro> P = new ArrayList<>();
-				ArrayList<Direccionpro> E = new ArrayList<>();
-				ArrayList<Direccionpro> M = new ArrayList<>();
-				ArrayList<Direccionpro> D = new ArrayList<>();
-
-				if(gie.getDireccionpros()!=null)
-				{
-				
-					for (int i = 0; i < gie.getDireccionpros().size(); i++) {
-					if (gie.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Pregrado")) {
-						P.add(gie.getDireccionpros().get(i));
-					}
-				}
-					
-
-					
-				
-				
-				for (int i = 0; i < gie.getDireccionpros().size(); i++) {
-					if (gie.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Especializacion")) {
-						E.add(gie.getDireccionpros().get(i));
-					}
-				}
-				
-				for (int i = 0; i < gie.getDireccionpros().size(); i++) {
-					if (gie.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Maestria")) {
-						M.add(gie.getDireccionpros().get(i));
-					}
-				}
-				
-				for (int i = 0; i < gie.getDireccionpros().size(); i++) {
-					if (gie.getDireccionpros().get(i).getTipoPro().equalsIgnoreCase("Doctorado")) {
-						D.add(gie.getDireccionpros().get(i));
-					}
-				}
-				
-				
-				}
-				request.getSession().setAttribute("direccionPregrado",P );	
-				request.getSession().setAttribute("direccionEspecializacion",E );	
-				request.getSession().setAttribute("direccionMaestria",M );
-				request.getSession().setAttribute("direccionDoctorado",D );
-
-				
-				
-				
-				
-				
-				
+				request.getSession().setAttribute("direccionProyectos", gie.getDireccionpros());
 				ArrayList<Proyecto> Dr = new ArrayList<>();
 				ArrayList<Proyecto>  Pr = (ArrayList<Proyecto>) new ProyectoDao().list();
-				if(Pr!=null){
-					for (int i = 0; i < Pr.size(); i++) {
-						if (Pr.get(i).getLineainvesrigacion().getGrupoie().getIdGrupoIE()==gie.getIdGrupoIE()) {
-							Dr.add(Pr.get(i));
-						}
+				ArrayList<Producto> productos = new ArrayList<>();
+				if(Pr!=null)
+				{
+				for (int i = 0; i < Pr.size(); i++) {
+					if (Pr.get(i).getLineainvesrigacion().getGrupoie().getIdGrupoIE()==gie.getIdGrupoIE()) {
+						Dr.add(Pr.get(i));
+						productos.addAll(Pr.get(i).getProductos());
 					}
 				}
+
+				}
+				List<Otraactividad> otrasActivididades =  gie.getOtraactividads();
+				for(int i=0;i<otrasActivididades.size();i++){
+					productos.addAll(otrasActivididades.get(i).getProductos());
+				}
+				request.getSession().setAttribute("proyectos",Dr);
+				request.getSession().setAttribute("productos", productos);
 				
-				request.getSession().setAttribute("proyectos",Dr );
-				
-				
-				request.getSession().setAttribute("eventos",new GrupoieDao().find(gie.getIdGrupoIE()).getEventos() );
+							
+				request.getSession().setAttribute("eventos",gie.getEventos());
 				
 				request.getSession().setAttribute("otrasActividades",gie.getOtraactividads());
 				
 				request.getSession().setAttribute("grupoIE", gie);
-				request.getRequestDispatcher("/index_integr.jsp").forward(request, response);
 				
+				 response.setHeader("Cache-Control","no-cache, no-store, must-revalidate");		 
+				 response.setDateHeader("Expires", 0);
+				request.getSession().setAttribute("pageJS", "historial_informes_dir_integr.jsp");
+				
+				//request.getRequestDispatcher("/indx_integrante.jsp").forward(request, response);
+				response.sendRedirect(request.getContextPath()+"/indx_integrante.jsp");
 			}
 			 else{ 
-				request.getSession().setAttribute("errorCredenciales", 1); 
-				request.getRequestDispatcher("/login.jsp").forward(request, response);
+				request.getSession().setAttribute( "errorCredenciales", 1); 
+				//request.getRequestDispatcher("/login.jsp").forward(request, response);
+				response.sendRedirect(request.getContextPath()+"/login.jsp");
 			 }
 			
 		}

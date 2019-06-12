@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -79,17 +80,21 @@ public class RegistroIntegrantesController extends HttpServlet {
 		Grupoie aux =  (Grupoie) request.getSession().getAttribute("grupoIE");
 		Grupointegrante grIntgr = new Grupointegrante();
 		GrupointegranteDao grIntegrDao = new GrupointegranteDao();
-	
-		Grupodirector grupoD=dr.getGrupodirectors().get(0);
-		Grupoie gie=grupoD.getGrupoie();
-		
-		grIntgr.setGrupoie(gie);
+
+		grIntgr.setGrupoie(aux);
 		grIntgr.setIntegrante(integr);		
 		grIntgr.setFechaRegistro(new Date());
 		grIntegrDao.insert(grIntgr);
+		
+		List<Grupointegrante> listIntegrantes=(List<Grupointegrante>)grIntegrDao.list();
+		ArrayList<Integrante> integrantes = new ArrayList<>();
+		for(Grupointegrante i: listIntegrantes){
+			if(i.getGrupoie().getNombre().equals(aux.getNombre())){
+				integrantes.add(i.getIntegrante());
+			}
+		}
 		request.getSession().setAttribute("grupoIE", aux);
-		aux= new GrupoieDao().find(aux.getIdGrupoIE());
-		request.getSession().setAttribute("integrantes", intdDao.list()); 	
+		request.getSession().setAttribute("integrantes", integrantes); 	
 		request.getSession().setAttribute("lineasDeInvestigacion", aux.getLineainvesrigacions());
 		
 		PrintWriter out = response.getWriter();

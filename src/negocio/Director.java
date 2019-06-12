@@ -34,15 +34,6 @@ public class Director implements Serializable {
 	@OneToMany(mappedBy="director")
 	private List<Grupodirector> grupodirectors;
 
-	//bi-directional many-to-one association to Solicitud
-	@OneToMany(mappedBy="director")
-	private List<Solicitud> solicituds;
-
-	public Director() {
-		grupodirectors=new ArrayList<Grupodirector>();
-		solicituds=new ArrayList<Solicitud>();
-	}
-
 	public int getIdDirector() {
 		return this.idDirector;
 	}
@@ -113,26 +104,6 @@ public class Director implements Serializable {
 		return grupodirector;
 	}
 
-	public List<Solicitud> getSolicituds() {
-		return this.solicituds;
-	}
 
-	public void setSolicituds(List<Solicitud> solicituds) {
-		this.solicituds = solicituds;
-	}
-
-	public Solicitud addSolicitud(Solicitud solicitud) {
-		getSolicituds().add(solicitud);
-		solicitud.setDirector(this);
-
-		return solicitud;
-	}
-
-	public Solicitud removeSolicitud(Solicitud solicitud) {
-		getSolicituds().remove(solicitud);
-		solicitud.setDirector(null);
-
-		return solicitud;
-	}
 
 }

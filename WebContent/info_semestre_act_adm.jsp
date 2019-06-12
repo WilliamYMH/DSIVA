@@ -21,7 +21,7 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-list-alt" aria-hidden="true"></i> &nbsp;2018 - II
+                            <i class="fa fa-list-alt" aria-hidden="true"></i> &nbsp;2019 - I
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -42,8 +42,8 @@
                                       <tr class="odd gradeA">
                                         
                                             <td><c:out value="${item.nombre}"/></td>
-                                            <td><center><button id="but_reg" class="ufps-btn"> <a href="#" style="color:white; text-decoration: none; ">Informe de gestion</a></button></center></td>
-                                            <td><center><button class="ufps-btn ufps-btn-yellow" id="but_reg"> <a  href="#" style="color:white; text-decoration: none; ">Plan de accion</a></button></center></td>
+                                            <td><center><button id="but_reg" class="btn btn-dark"> <a href="#" style="color:white; text-decoration: none; ">Informe de gestion</a></button></center></td>
+                                            <td><center><button class="btn btn-info" id="but_reg"> <a  href="#" style="color:white; text-decoration: none; ">Plan de accion</a></button></center></td>
                                        
                                         </tr>
                                     

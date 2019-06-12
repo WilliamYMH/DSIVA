@@ -1,6 +1,6 @@
 package negocio;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import javax.persistence.*;
 import java.util.List;
 
@@ -29,6 +29,10 @@ public class Departamento implements Serializable {
 	//bi-directional many-to-one association to Grupoie
 	@OneToMany(mappedBy="departamento")
 	private List<Grupoie> grupoies;
+	
+	//bi-directional many-to-one association to Direccionpro
+	@OneToMany(mappedBy="departamento")
+	private List<Direccionpro> direccionpros;
 
 	public Departamento() {
 	}
@@ -65,6 +69,14 @@ public class Departamento implements Serializable {
 		this.facultad = facultad;
 	}
 
+	public List<Direccionpro> getDireccionpros() {
+		return this.direccionpros;
+	}
+
+	public void setDireccionpros(List<Direccionpro> direccionpros) {
+		this.direccionpros = direccionpros;
+	}
+	
 	public List<Grupoie> getGrupoies() {
 		return this.grupoies;
 	}
@@ -79,6 +91,7 @@ public class Departamento implements Serializable {
 
 		return grupoy;
 	}
+	
 
 	public Grupoie removeGrupoy(Grupoie grupoy) {
 		getGrupoies().remove(grupoy);

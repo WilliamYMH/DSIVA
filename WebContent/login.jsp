@@ -14,6 +14,26 @@
 		<title>Vicerrectoria</title>
 </head>
 <body>
+
+<%	response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //http 1.1
+response.setHeader("Pragma", "no-cache"); //http 1.0
+response.setHeader("Expires", "0"); //proxies
+
+%>
+<c:if test="${user!=null}">
+<c:if test="${user.getClass().getName().equals('negocio.Director')}">
+<c:redirect url="indx_director.jsp"></c:redirect>
+</c:if>
+<c:if test="${user.getClass().getName().equals('negocio.Administrador')}">
+<c:redirect url="indx_administrador.jsp"></c:redirect>
+</c:if>
+<c:if test="${user.getClass().getName().equals('negocio.Integrante')}">
+<c:redirect url="indx_integrante.jsp"></c:redirect>
+</c:if>
+
+</c:if>
+
+
 	<div class="container-fluid">
 		<div class="row no-gutter">
 			<div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
@@ -48,7 +68,8 @@
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
-									
+									<c:set var="errorCredenciales" scope="session" value="0">
+	</c:set>
 								</c:if>
 								<form method="post" action="LoginController">
 									<div class="form-label-group">

@@ -30,12 +30,10 @@ public class Administrador implements Serializable {
 
 	private String password;
 
-	//bi-directional many-to-one association to Solicitud
-	@OneToMany(mappedBy="administrador")
-	private List<Solicitud> solicituds;
+	
 
 	public Administrador() {
-		solicituds=new ArrayList<Solicitud>();
+		
 	}
 
 	public int getIdAdministrador() {
@@ -86,26 +84,5 @@ public class Administrador implements Serializable {
 		this.password = password;
 	}
 
-	public List<Solicitud> getSolicituds() {
-		return this.solicituds;
-	}
-
-	public void setSolicituds(List<Solicitud> solicituds) {
-		this.solicituds = solicituds;
-	}
-
-	public Solicitud addSolicitud(Solicitud solicitud) {
-		getSolicituds().add(solicitud);
-		solicitud.setAdministrador(this);
-
-		return solicitud;
-	}
-
-	public Solicitud removeSolicitud(Solicitud solicitud) {
-		getSolicituds().remove(solicitud);
-		solicitud.setAdministrador(null);
-
-		return solicitud;
-	}
 
 }

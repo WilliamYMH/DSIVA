@@ -1,11 +1,9 @@
 package controller;
 
-import java.io.IOException;    
+import java.io.IOException; 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Date;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,19 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import negocio.Grupoie;
-import negocio.Solicitud;
 import negocio.Departamento;
 import negocio.Director;
-import negocio.Facultad;
 import negocio.Grupodirector;
 import model.GrupoieDao;
-import model.SolicitudDao;
 import model.DepartamentoDao;
 import model.DirectorDao;
-import model.FacultadDao;
-import model.GenericDao;
 import model.GrupodirectorDao;
-
 
 /**
  * Servlet implementation class EquipoController
@@ -60,81 +52,74 @@ public class RegistroController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		
-		
-		
-	
+
 		/*
-		ArrayList<Departamento> rtDepartamentos=(ArrayList<Departamento>) depDao.listarC(f);
-		for (int i = 0; i < rtDepartamentos.size(); i++) {
-			System.out.println(rtDepartamentos.get(i));
-		}
-		//String email = request.getParameter("email");
-		
-		request.getSession().setAttribute("listaDepart", rtDepartamentos);*/
-	String nombre = request.getParameter("nombreGrupo");
+		 * ArrayList<Departamento> rtDepartamentos=(ArrayList<Departamento>)
+		 * depDao.listarC(f); for (int i = 0; i < rtDepartamentos.size(); i++) {
+		 * System.out.println(rtDepartamentos.get(i)); } //String email =
+		 * request.getParameter("email");
+		 * 
+		 * request.getSession().setAttribute("listaDepart", rtDepartamentos);
+		 */
+		String nombre = request.getParameter("nombreGrupo");
 		int departamento = Integer.parseInt(request.getParameter("departamento"));
-		String nombreDirector=request.getParameter("nombre_director");
-		String apellidoDirector=request.getParameter("apellido_director");
-		String cedula=request.getParameter("cedula");
-		String email=request.getParameter("email_director");
-		String contraseña=request.getParameter("password");
+		String nombreDirector = request.getParameter("nombre_director");
+		String apellidoDirector = request.getParameter("apellido_director");
+		String cedula = request.getParameter("cedula");
+		String email = request.getParameter("email_director");
+		String contraseña = request.getParameter("password");
 		System.out.println(nombre);
 		System.out.println(nombreDirector);
 		System.out.println(apellidoDirector);
-		
+
 		Grupoie grupo = new Grupoie();
 		DepartamentoDao depDao = new DepartamentoDao();
-		
-	
-		
-		
+
 		// System.out.println("cedula: "+cedula);
-		Departamento dep=(Departamento)depDao.find(departamento);
+		Departamento dep = (Departamento) depDao.find(departamento);
 		grupo.setDepartamento(dep);
 		grupo.setNombre(nombre);
-		
+
 		Director dir = new Director();
 		dir.setNombre(nombreDirector);
 		dir.setApellido(apellidoDirector);
 		dir.setEmail(email);
 		dir.setIdentificacion(cedula);
-		dir.setPassword(contraseña);	
+		dir.setPassword(contraseña);
+
 		
-		GrupodirectorDao grDirectorDao = new GrupodirectorDao();
-		Grupodirector grDirector= new Grupodirector();
+		Grupodirector grDirector = new Grupodirector();
 		grDirector.setFechaRegistro(new Date());
 		grDirector.setDirector(dir);
 		grDirector.setGrupoie(grupo);
 		dir.addGrupodirector(grDirector);
-		
-		
-		
-		/*SolicitudDao sDao = new SolicitudDao();
-		Solicitud sol= new Solicitud();
-		sol.setDirector(dir);
-		sol.setFechaSolicitud(new Date());*/
-		
+
+		/*
+		 * SolicitudDao sDao = new SolicitudDao(); Solicitud sol= new
+		 * Solicitud(); sol.setDirector(dir); sol.setFechaSolicitud(new Date());
+		 */
+
 		PrintWriter out = response.getWriter();
 
- 
 		
 		
-		GenericDao gr = new GrupoieDao();
-		GenericDao dr = new DirectorDao();
 		
-		gr.insert(grupo);
+		DirectorDao dr = new DirectorDao();
 		dr.insert(dir);
+		GrupoieDao gr = new GrupoieDao();
+		gr.insert(grupo);
+		GrupodirectorDao grDirectorDao = new GrupodirectorDao();
 		grDirectorDao.insert(grDirector);
-		//sDao.insert(sol);
+		
+		// sDao.insert(sol);
 		HttpSession session = request.getSession();
 		session.setAttribute("director", dir);
 		response.sendRedirect(request.getContextPath() + "/login.jsp");
 
-
-		/*response.getWriter().append("<br/>Nombre: ").append(nombre);
-		response.getWriter().append("<br/>Presidente: ").append(presidente);*/
+		/*
+		 * response.getWriter().append("<br/>Nombre: ").append(nombre);
+		 * response.getWriter().append("<br/>Presidente: ").append(presidente);
+		 */
 
 	}
 

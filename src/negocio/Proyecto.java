@@ -34,11 +34,7 @@ public class Proyecto implements Serializable {
 
 	private String proyecto;
 
-	private String responzable;
-
-	//bi-directional many-to-one association to Actividadpro
-	@OneToMany(mappedBy="proyecto")
-	private List<Actividadpro> actividadpros;
+	private String responsable;
 
 	//bi-directional many-to-one association to Producto
 	@OneToMany(mappedBy="proyecto")
@@ -49,6 +45,7 @@ public class Proyecto implements Serializable {
 	private Lineainvesrigacion lineainvesrigacion;
 
 	public Proyecto() {
+	
 	}
 
 	public int getIdProyecto() {
@@ -107,35 +104,15 @@ public class Proyecto implements Serializable {
 		this.proyecto = proyecto;
 	}
 
-	public String getResponzable() {
-		return this.responzable;
+	public String getResponsable() {
+		return this.responsable;
 	}
 
-	public void setResponzable(String responzable) {
-		this.responzable = responzable;
+	public void setResponsable(String responsable) {
+		this.responsable = responsable;
 	}
 
-	public List<Actividadpro> getActividadpros() {
-		return this.actividadpros;
-	}
-
-	public void setActividadpros(List<Actividadpro> actividadpros) {
-		this.actividadpros = actividadpros;
-	}
-
-	public Actividadpro addActividadpro(Actividadpro actividadpro) {
-		getActividadpros().add(actividadpro);
-		actividadpro.setProyecto(this);
-
-		return actividadpro;
-	}
-
-	public Actividadpro removeActividadpro(Actividadpro actividadpro) {
-		getActividadpros().remove(actividadpro);
-		actividadpro.setProyecto(null);
-
-		return actividadpro;
-	}
+	
 
 	public List<Producto> getProductos() {
 		return this.productos;
@@ -164,6 +141,7 @@ public class Proyecto implements Serializable {
 	}
 
 	public void setLineainvesrigacion(Lineainvesrigacion lineainvesrigacion) {
+		//lineainvesrigacion.addProyecto(this);
 		this.lineainvesrigacion = lineainvesrigacion;
 	}
 

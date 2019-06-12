@@ -22,16 +22,10 @@ public class Evento implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
-
-	private String institucion;
-
 	private String nombre;
-
-	private String participantes;
-
 	private int porcentaje;
 
-	private String responzable;
+	private String responsable;
 
 	//bi-directional many-to-one association to Grupoie
 	@ManyToOne
@@ -64,13 +58,7 @@ public class Evento implements Serializable {
 		this.fecha = fecha;
 	}
 
-	public String getInstitucion() {
-		return this.institucion;
-	}
-
-	public void setInstitucion(String institucion) {
-		this.institucion = institucion;
-	}
+	
 
 	public String getNombre() {
 		return this.nombre;
@@ -80,13 +68,7 @@ public class Evento implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public String getParticipantes() {
-		return this.participantes;
-	}
 
-	public void setParticipantes(String participantes) {
-		this.participantes = participantes;
-	}
 
 	public int getPorcentaje() {
 		return this.porcentaje;
@@ -96,12 +78,12 @@ public class Evento implements Serializable {
 		this.porcentaje = porcentaje;
 	}
 
-	public String getResponzable() {
-		return this.responzable;
+	public String getResponsable() {
+		return this.responsable;
 	}
 
-	public void setResponzable(String responzable) {
-		this.responzable = responzable;
+	public void setResponsable(String responzable) {
+		this.responsable = responzable;
 	}
 
 	public Grupoie getGrupoie() {

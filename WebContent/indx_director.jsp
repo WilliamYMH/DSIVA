@@ -6,6 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,6 +28,15 @@
 
 <body>
 
+<%	response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //http 1.1
+response.setHeader("Pragma", "no-cache"); //http 1.0
+response.setHeader("Expires", "0"); //proxies
+
+%>
+<c:if test="${user==null}">
+<c:redirect url="login.jsp"></c:redirect>
+</c:if>
+
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
@@ -45,11 +55,9 @@
                     </a>
                     <ul class="collapse list-unstyled" id="planSubmenu">
                       <li>
-                      <form method="post" action="PlanController" id="plan">
-                
-                </form>
+                     
                         
-                            <a href="#" onclick="document.getElementById('plan').submit();" >Editar</a>
+                            <a href="#" data-seleccion="plan_accion_director_new">Editar</a>
                         </li>
                         <li>
                             <a href="#">Descargar pdf</a>
@@ -64,7 +72,7 @@
                     </a>
                     <ul class="collapse list-unstyled" id="informeSubmenu">
                         <li>
-                            <a href="informe_de_gestion_act.jsp">Editar</a>
+                            <a href="#" data-seleccion="informe_gestion">Ver</a>
                         </li>
                         <li>
                             <a href="#">Descargar pdf</a>
@@ -162,7 +170,8 @@
 </script>
 <script>
       $( window ).on( "load", function() {
-         $("#cont").load("historial_informes_dir_integr.jsp");    
+    	  var pag = "${pageJS}";
+         $("#cont").load(pag);    
     });        
   </script>
 </body>

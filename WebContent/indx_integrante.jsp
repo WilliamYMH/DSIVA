@@ -6,6 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,11 +27,16 @@
 </head>
 
 <body>
+
 <%	response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //http 1.1
 response.setHeader("Pragma", "no-cache"); //http 1.0
 response.setHeader("Expires", "0"); //proxies
 
 %>
+<c:if test="${user==null}">
+<c:redirect url="login.jsp"></c:redirect>
+</c:if>
+
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
@@ -43,24 +49,56 @@ response.setHeader("Expires", "0"); //proxies
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#" data-seleccion="info_semestre_act_adm">
+                    <a href="#planSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fa fa-pencil-square-o"></i>
-                        Planes e informes
+                        Plan de acción
                     </a>
-                   
+                    <ul class="collapse list-unstyled" id="planSubmenu">
+                      <li>
+                     
+                        
+                            <a href="#" data-seleccion="plan_accion_director_new">Editar</a>
+                        </li>
+                        <li>
+                            <a href="#">Descargar pdf</a>
+                        </li>
+                       
+                    </ul>
                 </li>
-                <li class="active">
-                        <a href="#" data-seleccion="historial_informes_adm">
+                <li>
+                    <a href="#informeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fa fa-file-text"></i>
+                       Informe de gestión
+                    </a>
+                    <ul class="collapse list-unstyled" id="informeSubmenu">
+                        <li>
+                            <a href="#" data-seleccion="informe_gestion">Ver</a>
+                        </li>
+                        <li>
+                            <a href="#">Descargar pdf</a>
+                        </li>
+                       
+                    </ul>
+                    <li class="active">
+                        <a href="#" data-seleccion="historial_informes_dir_integr">
                             <i class="fa fa-folder-open"></i>
                             Historial
                         </a>
                     </li>
+                </li>
                 <li>
-                    <a href="#" data-seleccion="ajustes_adm">
+                    <a href="#ajustesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fa fa-cogs"></i>
                        Ajustes
-                    </a></li>
-                  
+                    </a>
+                    <ul class="collapse list-unstyled" id="ajustesSubmenu">
+                        <li>
+                            <a href="#"  data-seleccion="ajustes_integr">Modificar datos</a>
+                        </li>
+                      
+                       
+                    </ul>
+                </li>
                 <li>            
                 <form method="post" action="LogoutController" id="logout">
                 
@@ -132,7 +170,8 @@ response.setHeader("Expires", "0"); //proxies
 </script>
 <script>
       $( window ).on( "load", function() {
-         $("#cont").load("historial_informes_adm.jsp");    
+    	  var pag = "${pageJS}";
+         $("#cont").load(pag);    
     });        
   </script>
 </body>

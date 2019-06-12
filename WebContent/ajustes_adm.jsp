@@ -23,32 +23,27 @@
     </div>
     <div class="panel-body">
         <div class="form-responsive">
-              
+              <form method="post" action="EditarDatosController">
                 <div class="row">
-                <form method="post" action="EditarDatosController">
                     <div class="col-md-6 col-mb-3">
-                    
-                    <label for="email">Ingresa tu nuevo correo</label>
+                    <label for="nombre">Ingresa tu nuevo correo</label>
 
                     <input type="email" class="form-control" id="email" name="email" placeholder="" value=""> 
                      <br> <center><button onclick="notificacion('guardado', '2000')" type="submit" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i></button></center>
-                
                   </div>
                    
                 
                  
                     <div class="col-md-6 mb-3">
-                  
+                
                     <label for="password">Si deseas cambiar tu contraseña, ingresa la nueva </label>
-                    <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="" value="">
-                    <br><center><button onclick="notificacion('guardado', '2000')" type="submit" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> </button> </center>
-                      
+                    <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="" value=""><br><center><button onclick="notificacion('guardado', '2000')" type="submit" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> </button> </center>
                     </div>
-					</form> 
+
                 </div>                 
                   
 
-            
+              </form>
           </div>
     </div>
 

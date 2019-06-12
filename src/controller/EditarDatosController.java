@@ -92,14 +92,24 @@ if(contraseña!=""){
 			}
 		}
 
+
+
+
 if(Director.class.equals((request.getSession().getAttribute("user").getClass()))){
 	
+	request.getSession().setAttribute("pageJS", "ajustes_dir.jsp");
+	request.getSession().setAttribute("datosActualizados", 1);
+	//request.getRequestDispatcher("/indx_director.jsp").forward(request, response);
 	response.sendRedirect(request.getContextPath() + "/indx_director.jsp");
 
 }else if(Integrante.class.equals(request.getSession().getAttribute("user").getClass())){
+	
+	//request.getRequestDispatcher("/indx_integrante.jsp").forward(request, response);
 	response.sendRedirect(request.getContextPath() + "/indx_integrante.jsp");
+	
 }else if(Administrador.class.equals(request.getSession().getAttribute("user").getClass())){
 	
+	//request.getRequestDispatcher("/indx_administrador.jsp").forward(request, response);
 	response.sendRedirect(request.getContextPath() + "/indx_administrador.jsp");
 
 }

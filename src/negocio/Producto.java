@@ -1,6 +1,6 @@
 package negocio;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import javax.persistence.*;
 import java.util.Date;
 
@@ -24,12 +24,17 @@ public class Producto implements Serializable {
 	private Date fecha;
 
 	private String nombre;
+	
+	private String responsable;
 
-	private int porcentaje;
+	//bi-directional many-to-one association to Otraactividad
+		@ManyToOne
+		@JoinColumn(name="id_OtraActividad")
+		private Otraactividad otraactividad;
 
-	//bi-directional many-to-one association to Proyecto
-	@ManyToOne
-	private Proyecto proyecto;
+		//bi-directional many-to-one association to Proyecto
+		@ManyToOne
+		private Proyecto proyecto;
 
 	public Producto() {
 	}
@@ -65,14 +70,15 @@ public class Producto implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	public int getPorcentaje() {
-		return this.porcentaje;
+	
+	public Otraactividad getOtraactividad() {
+		return this.otraactividad;
 	}
 
-	public void setPorcentaje(int porcentaje) {
-		this.porcentaje = porcentaje;
+	public void setOtraactividad(Otraactividad otraactividad) {
+		this.otraactividad = otraactividad;
 	}
+
 
 	public Proyecto getProyecto() {
 		return this.proyecto;
@@ -80,6 +86,14 @@ public class Producto implements Serializable {
 
 	public void setProyecto(Proyecto proyecto) {
 		this.proyecto = proyecto;
+	}
+
+	public String getResponsable() {
+		return responsable;
+	}
+
+	public void setResponsable(String responsable) {
+		this.responsable = responsable;
 	}
 
 }

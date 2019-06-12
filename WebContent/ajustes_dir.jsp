@@ -5,7 +5,22 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <div id="page-inner">
+<c:if test="${datosActualizados==1}">
+								
+									<div class="alert alert-success alert-dismissible fade show"
+										role="alert">
+										Datos actualizados
+										<button type="button" class="close" data-dismiss="alert"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<c:set var="datosActualizados" scope="session" value="0">
+	</c:set>
+									
+</c:if>
     <div class="row">
         <div class="col-md-12">
          <h2>AJUSTES</h2> 
@@ -128,8 +143,6 @@
     <div class="panel-body">
   
         <div class="table-responsive">
-          <jsp:useBean id="regInt" class="model.IntegranteDao" scope="request">
-                        </jsp:useBean>
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr>
@@ -140,7 +153,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                     <c:forEach var="item" items="${regInt.list()}"> 
+                     <c:forEach var="item" items="${integrantes}"> 
                     <tr class="odd gradeA">
                     <td>04/12/2018</td>
                     	 <td><c:out value="${item.nombre}"/></td>

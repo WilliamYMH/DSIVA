@@ -41,11 +41,11 @@
                                     <c:forEach var="item" items="${rSemestreAct.list()}"> 
                                    
                                       <tr class="odd gradeA">
-                                        	<td>2018</td>
-                                        	<td>II</td>
+                                        	<td>2019</td>
+                                        	<td>I</td>
                                             <td><c:out value="${item.nombre}"/></td>
-                                            <td><center><button id="but_reg" class="ufps-btn"> <a href="#" style="color:white; text-decoration: none; ">Informe de gestión</a></button></center></td>
-                                            <td><center><button class="ufps-btn ufps-btn-yellow" id="but_reg"> <a  href="#" style="color:white; text-decoration: none; ">Plan de acción</a></button></center></td>
+                                            <td><center><button id="but_reg" class="btn btn-dark"> <a href="#" style="color:white; text-decoration: none; ">Informe de gestión</a></button></center></td>
+                                            <td><center><button class="btn btn-info" id="but_reg"> <a  href="#" style="color:white; text-decoration: none; ">Plan de acción</a></button></center></td>
                                        
                                         </tr>
                                     

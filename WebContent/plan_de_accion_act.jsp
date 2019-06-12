@@ -60,8 +60,10 @@
 						style="box-shadow: 0px 0px 5px 1px black;">
 						<h4 style="margin: 1%; padding: 1%;">Lider linea de
 							investigacion: ${item.liderLinea}</h4>
+							<c:out value="${item.idLineaInvesrigacion}"></c:out>
 						<form name"paraProyectos"  method="post"
 							action="proyectosController">
+							<c:set var="linea1" value="${item.idLineaInvesrigacion}"/>
 							<c:forEach items="${item.proyectos}" var="item2">
 								<!-- Html encargado para las tablas de los proyectos de respectiva Linea de investigacion-->
 								<div
@@ -70,7 +72,7 @@
 									<input name="linea1" value="${item.idLineaInvesrigacion}"
 										disabled="disabled"
 										style="border: none; background-color: white;">
-
+									
 										<h4>Nombre del proyecto: ${item2.proyecto}</h4>
 										<table class="ufps-table ufps-text-left">
 											<thead>

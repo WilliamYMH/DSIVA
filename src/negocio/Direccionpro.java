@@ -1,7 +1,10 @@
 package negocio;
 
+
 import java.io.Serializable;
 import javax.persistence.*;
+
+import converters.NivelAcademicoEnumConverter;
 
 
 /**
@@ -19,15 +22,18 @@ public class Direccionpro implements Serializable {
 
 	private String director;
 
-	private String institucion;
-
 	private String nombreEstudiante;
 
 	private int porcentaje;
 
-	private String programaAca;
-
-	private String tipoPro;
+	//bi-directional many-to-one association to Departamento
+	@ManyToOne
+	@JoinColumn(name="departamento_id")
+	private Departamento departamento;
+	
+	@JoinColumn(name="NivelAcademico")
+	@Convert(converter = NivelAcademicoEnumConverter.class)
+	private NivelAcademicoEnum nivelAcademico;
 
 	private String tituloPro;
 
@@ -54,13 +60,7 @@ public class Direccionpro implements Serializable {
 		this.director = director;
 	}
 
-	public String getInstitucion() {
-		return this.institucion;
-	}
 
-	public void setInstitucion(String institucion) {
-		this.institucion = institucion;
-	}
 
 	public String getNombreEstudiante() {
 		return this.nombreEstudiante;
@@ -78,21 +78,9 @@ public class Direccionpro implements Serializable {
 		this.porcentaje = porcentaje;
 	}
 
-	public String getProgramaAca() {
-		return this.programaAca;
-	}
+	
 
-	public void setProgramaAca(String programaAca) {
-		this.programaAca = programaAca;
-	}
-
-	public String getTipoPro() {
-		return this.tipoPro;
-	}
-
-	public void setTipoPro(String tipoPro) {
-		this.tipoPro = tipoPro;
-	}
+	
 
 	public String getTituloPro() {
 		return this.tituloPro;
@@ -108,6 +96,22 @@ public class Direccionpro implements Serializable {
 
 	public void setGrupoie(Grupoie grupoie) {
 		this.grupoie = grupoie;
+	}
+	
+	public Departamento getDepartamento(){
+		return this.departamento;
+	}
+	
+	public void setDepartamento(Departamento departamento){
+		this.departamento=departamento;
+	}
+
+	public NivelAcademicoEnum getNivelAcademico() {
+		return nivelAcademico;
+	}
+
+	public void setNivelAcademico(NivelAcademicoEnum nivelAcademico) {
+		this.nivelAcademico = nivelAcademico;
 	}
 
 }

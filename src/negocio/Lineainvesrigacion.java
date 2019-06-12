@@ -1,7 +1,11 @@
 package negocio;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +39,7 @@ public class Lineainvesrigacion implements Serializable {
 	private List<Proyecto> proyectos;
 
 	public Lineainvesrigacion() {
+		proyectos=new ArrayList<Proyecto>();
 	}
 
 	public int getIdLineaInvesrigacion() {
@@ -50,7 +55,7 @@ public class Lineainvesrigacion implements Serializable {
 	}
 
 	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+		this.fecha = (fecha);
 	}
 
 	public String getLiderLinea() {

@@ -1,7 +1,8 @@
 package negocio;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,17 +27,19 @@ public class Otraactividad implements Serializable {
 
 	private int porcentaje;
 
-	private String responzable;
+	private String responsable;
 
 	//bi-directional many-to-one association to Grupoie
 	@ManyToOne
 	private Grupoie grupoie;
 
-	//bi-directional many-to-one association to Otroproducto
+	//bi-directional many-to-one association to Producto
 	@OneToMany(mappedBy="otraactividad")
-	private List<Otroproducto> otroproductos;
+	private List<Producto> productos;
+
 
 	public Otraactividad() {
+		
 	}
 
 	public int getIdOtraActividad() {
@@ -71,14 +74,6 @@ public class Otraactividad implements Serializable {
 		this.porcentaje = porcentaje;
 	}
 
-	public String getResponzable() {
-		return this.responzable;
-	}
-
-	public void setResponzable(String responzable) {
-		this.responzable = responzable;
-	}
-
 	public Grupoie getGrupoie() {
 		return this.grupoie;
 	}
@@ -87,26 +82,35 @@ public class Otraactividad implements Serializable {
 		this.grupoie = grupoie;
 	}
 
-	public List<Otroproducto> getOtroproductos() {
-		return this.otroproductos;
+
+	public String getResponsable() {
+		return responsable;
 	}
 
-	public void setOtroproductos(List<Otroproducto> otroproductos) {
-		this.otroproductos = otroproductos;
+	public void setResponsable(String responsable) {
+		this.responsable = responsable;
+	}
+	
+	public List<Producto> getProductos() {
+		return this.productos;
 	}
 
-	public Otroproducto addOtroproducto(Otroproducto otroproducto) {
-		getOtroproductos().add(otroproducto);
-		otroproducto.setOtraactividad(this);
-
-		return otroproducto;
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
 	}
 
-	public Otroproducto removeOtroproducto(Otroproducto otroproducto) {
-		getOtroproductos().remove(otroproducto);
-		otroproducto.setOtraactividad(null);
+	public Producto addProducto(Producto producto) {
+		getProductos().add(producto);
+		producto.setOtraactividad(this);
 
-		return otroproducto;
+		return producto;
+	}
+
+	public Producto removeProducto(Producto producto) {
+		getProductos().remove(producto);
+		producto.setOtraactividad(null);
+
+		return producto;
 	}
 
 }

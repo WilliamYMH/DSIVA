@@ -35,11 +35,16 @@ public class Conexion<T> {
 	}
 	
 	public <E> T find(E id){
-		T object = (T) em.find(c, id);
+		
+		T object=null;		
+			object = (T) em.find(c, id);				
 		return object;
+		
+		
 	}
 	
 	public List<T> list(){
+		
 		try{
 		TypedQuery<T> consulta= em.createNamedQuery(c.getSimpleName()+".findAll", c);
 		List<T> lista = (List<T>) consulta.getResultList();
@@ -52,6 +57,7 @@ public class Conexion<T> {
 	
 	
 	public void insert(T o){
+		
 		try {
 			em.getTransaction().begin();
 			em.persist(o);
@@ -59,13 +65,14 @@ public class Conexion<T> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			em = null;
+			//em.close();
 			
 		}
 		
 	}
 	
 	public void update(T o){
+		
 		try {
 			em.getTransaction().begin();
 			em.merge(o);
@@ -79,6 +86,7 @@ public class Conexion<T> {
 	}
 	
 	public void delete(T o){
+		
 		try {
 			em.getTransaction().begin();
 			em.remove(o);
@@ -86,7 +94,7 @@ public class Conexion<T> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-		//	em.close();
+			//em.close();
 		}
 		
 	}
