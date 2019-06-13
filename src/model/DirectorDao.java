@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import negocio.Administrador;
 import negocio.Director;
+import util.BcryptPassword;
 import util.Conexion;
 
 public class DirectorDao extends Conexion<Director> implements GenericDao<Director> {
@@ -16,7 +17,8 @@ public int seEncuentra(Director ad){
 	ArrayList<Director> arr=(ArrayList<Director>) this.list();
 	for (int i = 0; i < arr.size(); i++) {
 		if(arr.get(i).getEmail().equals(ad.getEmail())){
-			if(!arr.get(i).getPassword().equals(ad.getPassword())) return -1;
+			boolean password= new BcryptPassword().checkPassword(ad.getPassword(), arr.get(i).getPassword());
+			if(!password) return -1;
 			return arr.get(i).getIdDirector();
 		}
 	}

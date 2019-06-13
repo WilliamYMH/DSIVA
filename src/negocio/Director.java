@@ -30,9 +30,14 @@ public class Director implements Serializable {
 
 	private String password;
 
+	
 	//bi-directional many-to-one association to Grupodirector
 	@OneToMany(mappedBy="director")
 	private List<Grupodirector> grupodirectors;
+	
+	public Director(){
+		grupodirectors=new ArrayList<>();
+	}
 
 	public int getIdDirector() {
 		return this.idDirector;

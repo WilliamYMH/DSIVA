@@ -44,7 +44,7 @@ public class LoginController extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(true);
 	
-		
+			
 		String email = request.getParameter("email");
 		String contraseña = request.getParameter("password");
 		 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import negocio.Administrador;
 import negocio.Integrante;
+import util.BcryptPassword;
 import util.Conexion;
 
 public class IntegranteDao extends Conexion<Integrante> implements GenericDao<Integrante> {
@@ -17,7 +18,8 @@ public IntegranteDao() {
 	
 	for (int i = 0; i < arr.size(); i++) {
 		if(arr.get(i).getEmail().equals(ad.getEmail())){
-			if(!arr.get(i).getPassword().equals(ad.getPassword())) return -1;
+			boolean password= new BcryptPassword().checkPassword(ad.getPassword(), arr.get(i).getPassword());
+			if(!password) return -1;
 			return arr.get(i).getIdIntegrante();
 		}
 	}}

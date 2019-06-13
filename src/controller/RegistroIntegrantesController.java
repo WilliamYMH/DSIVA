@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import negocio.Grupoie;
 import negocio.Grupointegrante;
 import negocio.Integrante;
+import util.BcryptPassword;
 import negocio.Director;
 import negocio.Grupodirector;
 import model.GrupoieDao;
@@ -67,32 +68,34 @@ public class RegistroIntegrantesController extends HttpServlet {
 		String contraseña=request.getParameter("contraseña");
 				
 		Integrante integr=new Integrante();
+		BcryptPassword bcrypt = new BcryptPassword();
 		integr.setNombre(nombre);
 		integr.setEmail(email);
 		integr.setApellido(apellido);
 		integr.setIdentificacion(cedula);
-		integr.setPassword(contraseña);
+		integr.setPassword(bcrypt.hashPassword(contraseña));
+		new IntegranteDao().insert(integr);
 		
-		IntegranteDao intdDao=new IntegranteDao();
-		intdDao.insert(integr);
 		Director dr =(Director)request.getSession().getAttribute("user");
 		
 		Grupoie aux =  (Grupoie) request.getSession().getAttribute("grupoIE");
 		Grupointegrante grIntgr = new Grupointegrante();
-		GrupointegranteDao grIntegrDao = new GrupointegranteDao();
+		
 
-		grIntgr.setGrupoie(aux);
+		//grIntgr.setGrupoie(aux);
+		aux.addGrupointegrante(grIntgr);
 		grIntgr.setIntegrante(integr);		
 		grIntgr.setFechaRegistro(new Date());
-		grIntegrDao.insert(grIntgr);
+		new GrupointegranteDao().insert(grIntgr);
 		
-		List<Grupointegrante> listIntegrantes=(List<Grupointegrante>)grIntegrDao.list();
+		List<Grupointegrante> listIntegrantes=(List<Grupointegrante>)new GrupointegranteDao().list();
 		ArrayList<Integrante> integrantes = new ArrayList<>();
+		if(listIntegrantes!=null){
 		for(Grupointegrante i: listIntegrantes){
 			if(i.getGrupoie().getNombre().equals(aux.getNombre())){
 				integrantes.add(i.getIntegrante());
 			}
-		}
+		}}
 		request.getSession().setAttribute("grupoIE", aux);
 		request.getSession().setAttribute("integrantes", integrantes); 	
 		request.getSession().setAttribute("lineasDeInvestigacion", aux.getLineainvesrigacions());

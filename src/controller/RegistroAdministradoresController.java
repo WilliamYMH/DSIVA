@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.AdministradorDao;
 import negocio.Administrador;
+import util.BcryptPassword;
 
 
 
@@ -60,7 +61,7 @@ public class RegistroAdministradoresController extends HttpServlet {
 		adm.setEmail(email);
 		adm.setApellido(apellido);
 		adm.setIdentificacion(cedula);
-		adm.setPassword(contraseña);
+		adm.setPassword((contraseña));
 		
 		AdministradorDao intdDao=new AdministradorDao();
 		intdDao.insert(adm);

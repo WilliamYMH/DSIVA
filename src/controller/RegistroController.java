@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import negocio.Grupoie;
+import util.BcryptPassword;
 import negocio.Departamento;
 import negocio.Director;
 import negocio.Grupodirector;
@@ -80,18 +81,21 @@ public class RegistroController extends HttpServlet {
 		grupo.setDepartamento(dep);
 		grupo.setNombre(nombre);
 
+		BcryptPassword bcrypt = new BcryptPassword();
+		
 		Director dir = new Director();
 		dir.setNombre(nombreDirector);
 		dir.setApellido(apellidoDirector);
 		dir.setEmail(email);
 		dir.setIdentificacion(cedula);
-		dir.setPassword(contraseña);
+		dir.setPassword(bcrypt.hashPassword(contraseña));
 
 		
 		Grupodirector grDirector = new Grupodirector();
 		grDirector.setFechaRegistro(new Date());
 		grDirector.setDirector(dir);
-		grDirector.setGrupoie(grupo);
+		//grDirector.setGrupoie(grupo);
+		grupo.addGrupodirector(grDirector);
 		dir.addGrupodirector(grDirector);
 
 		/*
@@ -109,6 +113,7 @@ public class RegistroController extends HttpServlet {
 		GrupoieDao gr = new GrupoieDao();
 		gr.insert(grupo);
 		GrupodirectorDao grDirectorDao = new GrupodirectorDao();
+		System.out.println(grDirector.getDirector().getNombre()+" +-+ "+grDirector.getGrupoie().getNombre());
 		grDirectorDao.insert(grDirector);
 		
 		// sDao.insert(sol);

@@ -2,6 +2,8 @@ package negocio;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -51,6 +53,12 @@ public class Grupoie implements Serializable {
 	private List<Otraactividad> otraactividads;
 
 	public Grupoie() {
+		direccionpros=new ArrayList<>();
+		eventos=new ArrayList<>();
+		grupodirectors=new ArrayList<>();
+		grupointegrantes=new ArrayList<>();
+		lineainvesrigacions=new ArrayList<>();
+		otraactividads=new ArrayList<>();
 	}
 
 	public int getIdGrupoIE() {

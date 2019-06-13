@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import negocio.*;
+import util.BcryptPassword;
 import model.*;
 
 /**
@@ -74,20 +75,20 @@ if(contraseña!=""){
 				
 				Director dr=(Director)request.getSession().getAttribute("user");
 				DirectorDao dirDao=new DirectorDao();
-				dr.setPassword(contraseña);
+				dr.setPassword(new BcryptPassword().hashPassword(contraseña));
 				System.out.println("APELLIDO:"+dr.getApellido());
 				dirDao.update(dr);
 				
 			}else if(Integrante.class.equals(request.getSession().getAttribute("user").getClass())){
 				Integrante integ=(Integrante)request.getSession().getAttribute("user");
 				IntegranteDao integDao = new IntegranteDao();
-				integ.setPassword(contraseña);
+				integ.setPassword(new BcryptPassword().hashPassword(contraseña));
 				integDao.update(integ);
 				
 			}else if(Administrador.class.equals(request.getSession().getAttribute("user").getClass())){
 				Administrador adm=(Administrador)request.getSession().getAttribute("user");
 				AdministradorDao admDao= new AdministradorDao();
-				adm.setPassword(contraseña);
+				adm.setPassword((contraseña));
 				admDao.update(adm);
 			}
 		}

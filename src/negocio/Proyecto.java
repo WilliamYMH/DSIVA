@@ -2,6 +2,8 @@ package negocio;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,6 +47,7 @@ public class Proyecto implements Serializable {
 	private Lineainvesrigacion lineainvesrigacion;
 
 	public Proyecto() {
+		productos=new ArrayList<>();
 	
 	}
 
